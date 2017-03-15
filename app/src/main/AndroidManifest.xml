@@ -11,9 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.PopularMovies">
 
-        <activity android:name=".ui.activity.BrowseMoviesActivity">
+        <activity android:name=".ui.activity.BrowseMoviesActivity"
+            android:label="@string/title_browse_movies"
+            android:theme="@style/Theme.PopularMovies.BrowseMovies">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
