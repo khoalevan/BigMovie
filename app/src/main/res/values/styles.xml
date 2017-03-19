@@ -2,4 +2,22 @@
     <style name="Toolbar">
         <item name="android:background">?colorPrimary</item>
     </style>
+
+    <style name="ActionBar.ThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">#fff</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+
+    <style name="ActionBar.PopupThemeOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="ActionBar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">@color/body_text_white</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="ActionBar.Subtitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textColor">@color/body_text_white</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
 </resources>
