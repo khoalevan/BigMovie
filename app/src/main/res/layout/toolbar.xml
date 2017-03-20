@@ -4,4 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:id="@+id/toolbar"
-    style="@style/Toolbar"/>
+    style="@style/Toolbar"
+    android:theme="@style/ActionBar.ThemeOverlay"
+    app:popupTheme="@style/ActionBar.PopupThemeOverlay"
+    app:titleTextAppearance="@style/ActionBar.TitleText"/>
