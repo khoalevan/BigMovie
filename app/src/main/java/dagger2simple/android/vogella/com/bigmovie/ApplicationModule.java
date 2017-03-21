@@ -1,4 +1,4 @@
-package dagger2simple.android.vogella.com.bigmovie.ui;
+package dagger2simple.android.vogella.com.bigmovie;
 
 import android.app.Application;
 
@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger2simple.android.vogella.com.bigmovie.BigMoviesApplication;
 
 /**
  * Created by khoalevan on 3/20/2017.
@@ -23,7 +24,7 @@ public final class ApplicationModule {
     }
 
     @Provides @Singleton
-    Application privideApplication() {
+    Application provideApplication() {
         return application;
     }
 }
