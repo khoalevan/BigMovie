@@ -3,6 +3,7 @@ package dagger2simple.android.vogella.com.bigmovie.ui.activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 
 import dagger2simple.android.vogella.com.bigmovie.R;
 import dagger2simple.android.vogella.com.bigmovie.data.api.Sort;
@@ -30,5 +31,18 @@ public class BrowseMoviesActivity extends BaseActivity {
         mMode = (savedInstanceState != null)?
                 savedInstanceState.getString(STATE_MODE, Sort.POPULARITY.toString())
                 : PrefUtils.getBrowseMoviesMode(this);
+
+        initModeSpinner();
+    }
+
+
+    public void initModeSpinner() {
+        Toolbar toolbar = getToolbar();
+        if (toolbar == null) {
+            return;
+        }
+
+
+
     }
 }

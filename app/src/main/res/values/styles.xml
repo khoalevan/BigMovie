@@ -1,4 +1,11 @@
 <resources>
+
+    <style name="Widget.Movies.HeaderBar.Spinner.Base">
+        <!--<item name="android:background"-->
+    </style>
+
+    <style name="Widget.Movies.HeaderBar.Spinner" parent="Widget.Movies.HeaderBar.Spinner.Base" />
+
     <style name="Toolbar">
         <item name="android:background">?colorPrimary</item>
     </style>
