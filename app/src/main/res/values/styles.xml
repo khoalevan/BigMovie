@@ -1,7 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Widget.Movies.HeaderBar.Spinner.Base">
-        <!--<item name="android:background"-->
+    <style name="Widget.Movies.HeaderBar.Spinner.Base" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@color/material_yellow800</item>
+        <item name="android:dividerHeight">3dp</item>
+        <item name="android:overlapAnchor" tools:ignore="NewApi">true</item>
     </style>
 
     <style name="Widget.Movies.HeaderBar.Spinner" parent="Widget.Movies.HeaderBar.Spinner.Base" />
