@@ -31,4 +31,5 @@
         android:paddingRight="16dp"
         android:textColor="@color/list_dropdown_foreground_normal"
         android:textSize="16sp"/>
+
 </LinearLayout>

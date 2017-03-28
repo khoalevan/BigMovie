@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -24,9 +27,11 @@ import dagger2simple.android.vogella.com.bigmovie.utils.PrefUtils;
 public class BrowseMoviesActivity extends BaseActivity {
 
     private static final String STATE_MODE = "state_mode";
+    public static final String MODE_FAVORITES = "favorites";
 
     private String mMode;
     private boolean mTwoPane;
+    private ModeSpinnerAdapter mSpinnerAdapter = new ModeSpinnerAdapter();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,11 +55,35 @@ public class BrowseMoviesActivity extends BaseActivity {
             return;
         }
 
+        mSpinnerAdapter.clear();
+        mSpinnerAdapter.addItem(MODE_FAVORITES, "Favorites", false);
+        mSpinnerAdapter.addHeader("Sorting");
+        mSpinnerAdapter.addItem(Sort.POPULARITY.toString(), "Most popular", false);
+        mSpinnerAdapter.addItem(Sort.VOTE_COUNT.toString(), "Most rated", false);
+        mSpinnerAdapter.addItem(Sort.VOTE_AVERAGE.toString(), "Highest rated", false);
+
+        int itemToSelect = -1;
+
+        if (mMode.equals(MODE_FAVORITES))
+            itemToSelect = 0;
+        else if (mMode.equals(Sort.POPULARITY.toString()))
+            itemToSelect = 2;
+        else if (mMode.equals(Sort.VOTE_COUNT.toString()))
+            itemToSelect = 3;
+        else if (mMode.equals(Sort.VOTE_AVERAGE.toString()))
+            itemToSelect = 4;
+
         View spinnerContainer = LayoutInflater.from(this).inflate(R.layout.widget_toolbar_spinner, toolbar, false);
         ActionBar.LayoutParams lp = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         toolbar.addView(spinnerContainer, lp);
-        Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.mode_spinner);
 
+        Spinner spinner = (Spinner) spinnerContainer.findViewById(R.id.mode_spinner);
+        spinner.setAdapter(mSpinnerAdapter);
+
+
+        if (itemToSelect >= 0) {
+            
+        }
     }
 
     private class ModeSpinnerItem {
@@ -102,16 +131,57 @@ public class BrowseMoviesActivity extends BaseActivity {
             return i;
         }
 
+        private boolean isHeader(int position) {
+            return position >= 0 && position < mItems.size() && mItems.get(position).isHeader;
+        }
 
+        @Override
+        public View getDropDownView(int position, View view, ViewGroup parent) {
+            if (view == null || !view.getTag().toString().equals("DROPDOWN")) {
+                view = getLayoutInflater().inflate(R.layout.item_toolbar_spinner_dropdown, parent, false);
+                view.setTag("DROPDOWN");
+            }
+
+            TextView headerTextView = (TextView) view.findViewById(R.id.header_text);
+            View dividerView = view.findViewById(R.id.divider_view);
+            TextView normalTextView = (TextView) view.findViewById(android.R.id.text1);
+
+            if (isHeader(position)) {
+                headerTextView.setText(getTitle(position));
+                headerTextView.setVisibility(View.VISIBLE);
+                normalTextView.setVisibility(View.GONE);
+                dividerView.setVisibility(View.VISIBLE);
+            } else {
+                headerTextView.setVisibility(View.GONE);
+                normalTextView.setVisibility(View.VISIBLE);
+                dividerView.setVisibility(View.GONE);
+
+                setUpNormalDropdownView(position, normalTextView);
+            }
+
+            return view;
+        }
+
+        private void setUpNormalDropdownView(int position, TextView textView) {
+            textView.setText(getTitle(position));
+        }
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if (view == null || !view.getTag().toString().equals("NON_DROPDOWN")){
-                view = getLayoutInflater().inflate()
+                view = getLayoutInflater().inflate(R.layout.item_toolbar_spinner, viewGroup, false);
+                view.setTag("NON_DROPDOWN");
             }
+            TextView textView = (TextView) view.findViewById(android.R.id.text1);
+            textView.setText(getTitle(i));
 
-
-            return null;
+            return view;
         }
+
+        private String getTitle(int position) {
+            return position >= 0 && position < mItems.size()? mItems.get(position).title : "";
+        }
+
+
     }
 }
