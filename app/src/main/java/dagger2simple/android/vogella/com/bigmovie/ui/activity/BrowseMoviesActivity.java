@@ -82,7 +82,7 @@ public class BrowseMoviesActivity extends BaseActivity {
 
 
         if (itemToSelect >= 0) {
-            
+
         }
     }
 
