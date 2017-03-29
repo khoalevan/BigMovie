@@ -2,6 +2,8 @@ package dagger2simple.android.vogella.com.bigmovie.data.repository;
 
 import android.content.ContentResolver;
 
+import com.squareup.sqlbrite.BriteContentResolver;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -17,7 +19,7 @@ public final class RepositoryModule {
     @Singleton
     @Provides
     public MoviesRepository providesMoviesRepository(MoviesApi moviesApi, ContentResolver contentResolver,
-                                                     ) {
-
+                                                     BriteContentResolver briteContentResolver, GenresRepository repository) {
+        return new MoviesRepositoryImpl(moviesApi, contentResolver, briteContentResolver, repository);
     }
 }
