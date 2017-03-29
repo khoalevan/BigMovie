@@ -1,5 +1,6 @@
 package dagger2simple.android.vogella.com.bigmovie.ui.activity;
 
+import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -18,20 +19,25 @@ import java.util.ArrayList;
 
 import dagger2simple.android.vogella.com.bigmovie.R;
 import dagger2simple.android.vogella.com.bigmovie.data.api.Sort;
+import dagger2simple.android.vogella.com.bigmovie.ui.fragment.FavoredMoviesFragment;
+import dagger2simple.android.vogella.com.bigmovie.ui.fragment.MoviesFragment;
+import dagger2simple.android.vogella.com.bigmovie.ui.fragment.SortedMoviesFragment;
 import dagger2simple.android.vogella.com.bigmovie.utils.PrefUtils;
 
 /**
  * Created by khoalevan on 3/15/17.
  */
 
-public class BrowseMoviesActivity extends BaseActivity {
+public class BrowseMoviesActivity extends BaseActivity implements MoviesFragment.Listener{
 
     private static final String STATE_MODE = "state_mode";
     public static final String MODE_FAVORITES = "favorites";
+    private static final String MOVIES_FRAGMENT_TAG = "fragment_movies";
 
     private String mMode;
     private boolean mTwoPane;
     private ModeSpinnerAdapter mSpinnerAdapter = new ModeSpinnerAdapter();
+    private MoviesFragment mMoviesFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +54,28 @@ public class BrowseMoviesActivity extends BaseActivity {
         initModeSpinner();
     }
 
+    @Override
+    public void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        mMoviesFragment = (MoviesFragment) getSupportFragmentManager().findFragmentByTag(MOVIES_FRAGMENT_TAG);
+        if (mMoviesFragment == null) {
+            replaceMoviesFragment(mMode.equals(MODE_FAVORITES) ? new FavoredMoviesFragment()
+                : SortedMoviesFragment.newInstance(Sort.fromString(mMode)));
+        }
+    }
+
+    private void replaceMoviesFragment(MoviesFragment fragment) {
+        mMoviesFragment = fragment;
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.movies_container, fragment, MOVIES_FRAGMENT_TAG)
+                .commit();
+    }
+
+    @Override
+    public void onMovieSelected(Movie movie, View view) {
+
+    }
 
     public void initModeSpinner() {
         Toolbar toolbar = getToolbar();
