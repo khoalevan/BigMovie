@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dagger2simple.android.vogella.com.bigmovie.ui.widget.MultiSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/multi_swipe_refresh_layout">
+
+    <dagger2simple.android.vogella.com.bigmovie.ui.widget.BetterViewAnimator
+        android:id="@+id/movies_animator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/movies_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <dagger2simple.android.vogella.com.bigmovie.ui.widget.AnimatorStateView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/view_error"
+            app:messageImage="@drawable/egg_error"
+            app:messageText="This content is not available offline."/>
+
+        <dagger2simple.android.vogella.com.bigmovie.ui.widget.AnimatorStateView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/view_empty"
+            app:messageText="You have no favored movies yet"
+            app:messageImage="@drawable/egg_error"/>
+    </dagger2simple.android.vogella.com.bigmovie.ui.widget.BetterViewAnimator>
+</dagger2simple.android.vogella.com.bigmovie.ui.widget.MultiSwipeRefreshLayout>

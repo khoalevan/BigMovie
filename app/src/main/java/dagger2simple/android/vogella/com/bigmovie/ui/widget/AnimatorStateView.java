@@ -2,6 +2,7 @@ package dagger2simple.android.vogella.com.bigmovie.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,5 +42,21 @@ public final class AnimatorStateView extends LinearLayout {
         ButterKnife.bind(this, root);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AnimatorStateView, defStyle, 0);
+
+        String text = a.getString(R.styleable.AnimatorStateView_messageText);
+        Drawable image = a.getDrawable(R.styleable.AnimatorStateView_messageImage);
+
+        mTextView.setText(text);
+        mImageView.setImageDrawable(image);
+
+        a.recycle();;
+    }
+
+    public void setMessageText(CharSequence text) {
+        mTextView.setText(text);
+    }
+
+    public void setMessageImage(Drawable drawable) {
+        mImageView.setImageDrawable(drawable);
     }
 }
